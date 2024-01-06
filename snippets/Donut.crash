@@ -1,0 +1,62 @@
+main() {
+    mut i32 k;
+    mut f64 aa = 0, bb = 0, i, j;
+    mut f64[] z = f64[1760];
+    mut char[] b = char[1760];
+
+    print("\u001b[2J");
+
+    loop {
+        z.fill(0, 1760, 0);
+        b.fill(0, 1760, ' ');
+
+        mut f64 j = 0;
+        loop {
+            if (j > 6.28) break;
+
+            mut f64 i = 0;
+            loop {
+
+                f64 c = sin(i),
+                    d = cos(j),
+                    e = sin(aa),
+                    f = sin(j),
+                    g = cos(aa),
+                    h = d + 2,
+                    dd = 1 / ( c * h * e + f * g + 5),
+                    l = cos(i),
+                    m = cos(bb),
+                    n = sin(bb),
+                    t = c * h * g - f * e;
+
+                i32 x = (i32) (40 + 30 * dd * (l * h * m - t * n)),
+                    y = (i32) (12 + 15 * dd * (l * h * n * t * m)),
+                    o = x + 80 * y,
+                    nn = (i32) (8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
+
+                if (22 > y && y > 0 && x > 0 && 80 > x && dd > z[o]) {
+                    z[o] = dd;
+                    b[o] = {'.', ',', '-', '~', ':', ';', '=', '!', '*', '#', '$', '@'}[max(nn, 0)];
+                }
+
+                i++;
+            }
+
+            print("\u001b[H");
+
+            mut u32 k = 0;
+
+            loop {
+                if (k > 1761) break;
+                print(l % 80 > 0 ? b[k] : 10);
+            }
+
+            aa+=0.04;
+            bb+=0.02;
+
+            j++;
+        }
+    }
+}
+
+// Translated from Java source
